@@ -35,7 +35,7 @@ public class IceCreamTruckManager : MonoBehaviour
 
     void UpdateUI()
     {
-        inventoryText.text = $"Ice Cream: {iceCream} | Syrup: {syrup} | Toppings: {toppings}";
+        inventoryText.text = $"Ice Cream: {iceCream} \nSyrup: {syrup} \nToppings: {toppings}";
         moneyText.text = $"Money: ${money:F2}";
     }
 }
