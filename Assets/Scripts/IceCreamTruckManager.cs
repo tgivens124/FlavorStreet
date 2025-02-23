@@ -115,6 +115,7 @@ public class IceCreamTruckManager : MonoBehaviour
     public Text moneyText;
     public float price;
     public WeatherManager weatherManager; // Reference to WeatherManager
+    public Sprite customerSprite; // Reference to the customer sprite
 
     private Customer[] customers;
 
@@ -131,7 +132,22 @@ public class IceCreamTruckManager : MonoBehaviour
         customers = new Customer[10];
         for (int i = 0; i < customers.Length; i++)
         {
-            customers[i] = new GameObject("Customer").AddComponent<Customer>();
+            GameObject customerObject = new GameObject("Customer");
+            SpriteRenderer spriteRenderer = customerObject.AddComponent<SpriteRenderer>(); // Add SpriteRenderer component
+            customers[i] = customerObject.AddComponent<Customer>();
+            customers[i].spriteRenderer = spriteRenderer; // Assign the SpriteRenderer to the Customer
+
+            // Ensure customerSprite is assigned
+            if (customerSprite != null)
+            {
+                customers[i].spriteRenderer.sprite = customerSprite; // Assign the customer sprite
+            }
+            else
+            {
+                Debug.LogError("Customer sprite is not assigned in the IceCreamTruckManager script.");
+            }
+
+            customers[i].currentWeather = (Customer.Weather)weatherManager.currentWeather;
         }
     }
 

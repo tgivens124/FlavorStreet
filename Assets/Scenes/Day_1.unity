@@ -1338,6 +1338,7 @@ MonoBehaviour:
   moneyText: {fileID: 933985968}
   price: 0
   weatherManager: {fileID: 290666728}
+  customerSprite: {fileID: 21300000, guid: a621df66ad9d71842968dc4b770b36d4, type: 3}
 --- !u!4 &1436062235
 Transform:
   m_ObjectHideFlags: 0
