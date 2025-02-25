@@ -13,6 +13,9 @@ public class Customer : MonoBehaviour
     private float delay; // Delay before the customer starts moving
     private bool isMoving = false; // Flag to check if the customer has started moving
 
+    // Index of the customer in the array
+    public int customerIndex;
+
     void Start()
     {
         // Check if a SpriteRenderer component is already present
@@ -35,8 +38,8 @@ public class Customer : MonoBehaviour
         // Set the target position to (X:-10.26, Y:-0.74)
         targetPosition = new Vector3(-10.26f, transform.position.y, 0);
 
-        // Set a random delay for each customer to start moving
-        delay = Random.Range(0.0f, 10.0f); // Adjust the range as needed
+        // Set a fixed delay based on the customer's index in the array
+        delay = customerIndex * 1.0f; // Adjust the multiplier as needed
     }
 
     void Update()
@@ -113,6 +116,14 @@ public class Customer : MonoBehaviour
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         }
 
+        // Add a BoxCollider2D component for collision detection
+        BoxCollider2D collider = gameObject.AddComponent<BoxCollider2D>();
+        collider.isTrigger = true;
+
+        // Add a Rigidbody2D component for physics interactions
+        Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.isKinematic = true; // Set to kinematic as we are controlling movement manually
+
         // Set the sortingOrder to 3
         spriteRenderer.sortingOrder = 3;
 
@@ -145,6 +156,24 @@ public class Customer : MonoBehaviour
         if (isMoving)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+            // If the customer reaches the target position, stop moving
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                isMoving = false;
+            }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Collision detected with: " + other.gameObject.name); // Log collision with any object
+
+        if (other.CompareTag("IceCreamTruck"))
+        {
+            // Handle interaction with the ice cream truck
+            Debug.Log("Customer reached the ice cream truck!");
+            // You can add logic here to handle the purchase or feedback process
         }
     }
 
