@@ -8,6 +8,10 @@ public class Customer : MonoBehaviour
     public float purchaseProbability;
     public float feedbackRating;
     public SpriteRenderer spriteRenderer; // Reference to SpriteRenderer
+    public float speed = 2.0f; // Speed of customer movement
+    public Vector3 targetPosition; // Target position for customer movement
+    private float delay; // Delay before the customer starts moving
+    private bool isMoving = false; // Flag to check if the customer has started moving
 
     void Start()
     {
@@ -19,11 +23,39 @@ public class Customer : MonoBehaviour
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         }
 
+        // Set the sortingOrder to 3
+        spriteRenderer.sortingOrder = 3;
+
         // Set initial weather (this can be managed by another script or manager)
         currentWeather = Weather.Hot;
 
         // Calculate purchase probability based on weather
         UpdatePurchaseProbability();
+
+        // Set the target position to (X:-10.26, Y:-0.74)
+        targetPosition = new Vector3(-10.26f, transform.position.y, 0);
+
+        // Set a random delay for each customer to start moving
+        delay = Random.Range(0.0f, 10.0f); // Adjust the range as needed
+    }
+
+    void Update()
+    {
+        // Wait for the delay before starting the movement
+        if (delay > 0)
+        {
+            delay -= Time.deltaTime;
+            return;
+        }
+
+        // Start moving the customer after the delay
+        isMoving = true;
+
+        // Move the customer towards the target position
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        }
     }
 
     public void UpdatePurchaseProbability()
@@ -63,6 +95,13 @@ public class Customer : MonoBehaviour
     public float purchaseProbability;
     public float feedbackRating;
     public SpriteRenderer spriteRenderer; // Reference to SpriteRenderer
+    public float speed = 2.0f; // Speed of customer movement
+    public Vector3 targetPosition; // Target position for customer movement
+    private float delay; // Delay before the customer starts moving
+    private bool isMoving = false; // Flag to check if the customer has started moving
+
+    // Index of the customer in the array
+    public int customerIndex;
 
     void Start()
     {
@@ -74,7 +113,7 @@ public class Customer : MonoBehaviour
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         }
 
-        // Set the sortingOrder to 2
+        // Set the sortingOrder to 3
         spriteRenderer.sortingOrder = 3;
 
         // Set initial weather (this can be managed by another script or manager)
@@ -82,6 +121,31 @@ public class Customer : MonoBehaviour
 
         // Calculate purchase probability based on weather
         UpdatePurchaseProbability();
+
+        // Set the target position to (X:-10.26, Y:-0.74)
+        targetPosition = new Vector3(-10.26f, transform.position.y, 0);
+
+        // Set a fixed delay based on the customer's index in the array
+        delay = customerIndex * 1.0f; // Adjust the multiplier as needed
+    }
+
+    void Update()
+    {
+        // Wait for the delay before starting the movement
+        if (delay > 0)
+        {
+            delay -= Time.deltaTime;
+            return;
+        }
+
+        // Start moving the customer after the delay
+        isMoving = true;
+
+        // Move the customer towards the target position
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        }
     }
 
     public void UpdatePurchaseProbability()
