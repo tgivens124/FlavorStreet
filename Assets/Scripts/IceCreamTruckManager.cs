@@ -3,6 +3,21 @@ using UnityEngine.UI;
 
 public class IceCreamTruckManager : MonoBehaviour
 {
+    public static IceCreamTruckManager Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+    }
     public int iceCream;
     public int syrup;
     public int toppings;
@@ -14,6 +29,8 @@ public class IceCreamTruckManager : MonoBehaviour
     public Sprite customerSprite; // Reference to the customer sprite
     public float minX, maxX, minY, maxY; // Define the boundaries for customer positions
 
+    public int totalServingsSold;
+
     private Customer[] customers;
 
     void Start()
@@ -22,8 +39,18 @@ public class IceCreamTruckManager : MonoBehaviour
         syrup = 10;
         toppings = 10;
         money = 20.0f;
+        price = 2.0f;
         weatherManager = FindObjectOfType<WeatherManager>(); // Find the WeatherManager in the scene
         UpdateUI();
+
+        StartNewDay();
+    }
+
+    public void StartNewDay()
+    {
+        totalServingsSold = 0;
+        // Update weather for the new day
+        weatherManager.UpdateWeather();
 
         // Create customers (you can adjust the number as needed)
         customers = new Customer[10];
@@ -48,37 +75,26 @@ public class IceCreamTruckManager : MonoBehaviour
             customers[i].transform.position = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 0); // Set random initial position
             customers[i].customerIndex = i; // Set the customer index
         }
-    }
 
-    public void StartNewDay()
-    {
-        // Update weather for the new day
-        weatherManager.UpdateWeather();
-
-        // Logic for starting a new day and calculating sales
-        int totalServingsSold = 0;
-        foreach (var customer in customers)
-        {
-            customer.currentWeather = (Customer.Weather)weatherManager.currentWeather; // Explicit cast
-            customer.UpdatePurchaseProbability();
-            if (Random.value <= customer.purchaseProbability)
-            {
-                totalServingsSold++;
-            }
-
-            customer.LeaveFeedback(iceCream, syrup, toppings);
-        }
-
-        money += totalServingsSold * price;
-        iceCream -= totalServingsSold;
+        /*iceCream -= totalServingsSold;
         syrup -= totalServingsSold;
         toppings -= totalServingsSold;
-        UpdateUI();
+        UpdateUI();*/
     }
 
     void UpdateUI()
     {
         inventoryText.text = $"Ice Cream: {iceCream} \nSyrup: {syrup} \nToppings: {toppings}";
         moneyText.text = $"Money: ${money:F2}";
+    }
+
+    void Update()
+    {
+        // Logic to progress to the next day (e.g., button press or time-based)
+        /*if (money == 50)
+        {
+            StartNewDay();
+        }*/
+        UpdateUI();
     }
 }
