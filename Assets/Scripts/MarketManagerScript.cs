@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
-public class Market_UI : MonoBehaviour
+public class MarketManagerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int[,] marketItems = new int[5, 5];
     public float money;
-    public Text MoneyTXT;
+    public TMP_Text MoneyTXT;
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class Market_UI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Buy()
+    public void Buy()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
 
