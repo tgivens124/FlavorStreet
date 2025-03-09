@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Customer : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Customer : MonoBehaviour
     public float purchaseProbability;
     public float feedbackRating;
     public SpriteRenderer spriteRenderer; // Reference to SpriteRenderer
-    public float speed = 2.0f; // Speed of customer movement
+    public float speed; // Speed of customer movement
     public Vector3 targetPosition; // Target position for customer movement
     private float delay; // Delay before the customer starts moving
     private bool isMoving = false; // Flag to check if the customer has started moving
@@ -35,7 +36,7 @@ public class Customer : MonoBehaviour
         rb.isKinematic = true; // Set to kinematic as we are controlling movement manually
 
         // Set the sortingOrder to 3
-        spriteRenderer.sortingOrder = 3;
+        spriteRenderer.sortingOrder = 4;
 
         // Set initial weather (this can be managed by another script or manager)
         currentWeather = Weather.Hot;
@@ -44,10 +45,13 @@ public class Customer : MonoBehaviour
         UpdatePurchaseProbability();
 
         // Set the target position to (X:-10.26, Y:-0.74)
-        targetPosition = new Vector3(-10.26f, transform.position.y, 0);
+        float Yoffset = Random.Range(-.4f, .3f);
+        targetPosition = new Vector3(-10.26f, transform.position.y + Yoffset, 0);
 
         // Set a fixed delay based on the customer's index in the array
-        delay = customerIndex * 1.0f; // Adjust the multiplier as needed
+        speed = Random.Range(1.9f, 2.1f);
+        float randomDelay = Random.Range(.8f, 1f);
+        delay = customerIndex * randomDelay; // Adjust the multiplier as needed
     }
 
     void Update()
@@ -92,15 +96,23 @@ public class Customer : MonoBehaviour
                 IceCreamTruckManager.Instance.iceCream -= 1;
                 IceCreamTruckManager.Instance.syrup -= 1;
                 IceCreamTruckManager.Instance.toppings -= 1;
+                Invoke("StopThenWalk", 1.15f);
+                //StartCoroutine(StopThenWalk(2f));
+
             }
         }
+    }
+
+    void StopThenWalk() {
+        delay = 2;
+        isMoving = false;
     }
 
     public void UpdatePurchaseProbability()
     {
         if (currentWeather == Weather.Hot)
         {
-            purchaseProbability = 0.8f; // 80% chance of buying ice cream
+            purchaseProbability = 0.7f; // 80% chance of buying ice cream
         }
         else if (currentWeather == Weather.Cold)
         {
