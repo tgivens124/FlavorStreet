@@ -39,7 +39,7 @@ public class IceCreamTruckManager : MonoBehaviour
         syrup = 10;
         toppings = 10;
         money = 20.0f;
-        price = 2.0f;
+        price = 2.00f;
         weatherManager = FindObjectOfType<WeatherManager>(); // Find the WeatherManager in the scene
         UpdateUI();
 
@@ -84,7 +84,7 @@ public class IceCreamTruckManager : MonoBehaviour
 
     void UpdateUI()
     {
-        inventoryText.text = $"Ice Cream: {iceCream} \nSyrup: {syrup} \nToppings: {toppings}";
+        inventoryText.text = $"Inventory\n\nIce Cream: {iceCream} \nSyrup: {syrup} \nToppings: {toppings}";
         moneyText.text = $"Money: ${money:F2}";
     }
 

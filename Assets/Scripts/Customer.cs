@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
     public enum Weather { Hot, Cold }
-
+    public GameObject FloatingTextPrefab;
     public Weather currentWeather;
     public float purchaseProbability;
     public float feedbackRating;
@@ -19,6 +20,9 @@ public class Customer : MonoBehaviour
 
     void Start()
     {
+
+        FloatingTextPrefab = Resources.Load("FloatingText") as GameObject;
+
         // Check if a SpriteRenderer component is already present
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
@@ -52,6 +56,8 @@ public class Customer : MonoBehaviour
         speed = Random.Range(1.9f, 2.1f);
         float randomDelay = Random.Range(.8f, 1f);
         delay = customerIndex * randomDelay; // Adjust the multiplier as needed
+
+    
     }
 
     void Update()
@@ -88,7 +94,7 @@ public class Customer : MonoBehaviour
             // Handle interaction with the ice cream truck
             Debug.Log("Customer reached the ice cream truck!");
             // You can add logic here to handle the purchase or feedback process
-            if(Random.value <= purchaseProbability)
+            if(checkInventory() && Random.value <= purchaseProbability)
             {
                 IceCreamTruckManager.Instance.totalServingsSold += 1;
                 IceCreamTruckManager.Instance.money += IceCreamTruckManager.Instance.price;
@@ -97,10 +103,20 @@ public class Customer : MonoBehaviour
                 IceCreamTruckManager.Instance.syrup -= 1;
                 IceCreamTruckManager.Instance.toppings -= 1;
                 Invoke("StopThenWalk", 1.15f);
-                //StartCoroutine(StopThenWalk(2f));
-
+                if (FloatingTextPrefab != null){
+                    StartCoroutine(ShowFloatingText(IceCreamTruckManager.Instance.price, 0f));
+                }
             }
         }
+    }
+
+    bool checkInventory(){
+        if( IceCreamTruckManager.Instance.iceCream==0 ||
+        IceCreamTruckManager.Instance.syrup==0 ||
+        IceCreamTruckManager.Instance.toppings==0){
+            return false;
+        } 
+        return true;
     }
 
     void StopThenWalk() {
@@ -112,11 +128,11 @@ public class Customer : MonoBehaviour
     {
         if (currentWeather == Weather.Hot)
         {
-            purchaseProbability = 0.7f; // 80% chance of buying ice cream
+            purchaseProbability = 0.6f; // 80% chance of buying ice cream
         }
         else if (currentWeather == Weather.Cold)
         {
-            purchaseProbability = 0.3f; // 30% chance of buying ice cream
+            purchaseProbability = 0.25f; // 30% chance of buying ice cream
         }
     }
 
@@ -124,14 +140,30 @@ public class Customer : MonoBehaviour
     {
         // Simple feedback calculation based on ingredients
         feedbackRating = (iceCream + syrup + toppings) / 3.0f;
+        float tip;
 
         if (feedbackRating < 5)
         {
             Debug.Log("Customer Feedback: Not enough ingredients, lower rating.");
+            tip = IceCreamTruckManager.Instance.price * .1f;
         }
         else
         {
             Debug.Log("Customer Feedback: Satisfied with the ice cream.");
+            tip = IceCreamTruckManager.Instance.price * .5f;
         }
+
+        if (FloatingTextPrefab != null){
+            StartCoroutine(ShowFloatingText(tip, .5f));
+            IceCreamTruckManager.Instance.money += tip;
+        }
+    }
+
+    IEnumerator ShowFloatingText(float payment, float delayTime){
+        yield return new WaitForSeconds(delayTime);
+        Vector3 textPosition = new Vector3(300, 200, 0);
+        GameObject parentCanvas = GameObject.Find("Canvas");
+        var currText = Instantiate(FloatingTextPrefab, textPosition, Quaternion.identity, parentCanvas.transform);
+        currText.GetComponent<Text>().text = "+$" + payment;
     }
 }
