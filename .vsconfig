@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿{
+=======
+{
+>>>>>>> 301342d0198a302079e62b3a370faf13fa0d1aec
   "version": "1.0",
   "components": [
     "Microsoft.VisualStudio.Workload.ManagedGame"

@@ -6,6 +6,7 @@
 Shader "TextMeshPro/Mobile/Distance Field SSD" {
 
 Properties {
+<<<<<<< HEAD
 	[HDR]_FaceColor		("Face Color", Color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
@@ -14,6 +15,16 @@ Properties {
 	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
 
 	[HDR]_UnderlayColor		("Border Color", Color) = (0,0,0,.5)
+=======
+	_FaceColor		    ("Face Color", Color) = (1,1,1,1)
+	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
+
+	_OutlineColor	    ("Outline Color", Color) = (0,0,0,1)
+	_OutlineWidth		("Outline Thickness", Range(0,1)) = 0
+	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
+
+	_UnderlayColor		("Border Color", Color) = (0,0,0,.5)
+>>>>>>> 301342d0198a302079e62b3a370faf13fa0d1aec
 	_UnderlayOffsetX 	("Border OffsetX", Range(-1,1)) = 0
 	_UnderlayOffsetY 	("Border OffsetY", Range(-1,1)) = 0
 	_UnderlayDilate		("Border Dilate", Range(-1,1)) = 0
