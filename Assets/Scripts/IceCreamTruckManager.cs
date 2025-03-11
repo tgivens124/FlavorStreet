@@ -35,10 +35,15 @@ public class IceCreamTruckManager : MonoBehaviour
 
     void Start()
     {
-        iceCream = 10;
-        syrup = 10;
-        toppings = 10;
-        money = 20.0f;
+        // iceCream = 10;
+        // syrup = 10;
+        // toppings = 10;
+        // money = 20.0f;
+        iceCream = GlobalVariables.iceCreamCount;
+        syrup = GlobalVariables.syrupCount;
+        toppings = GlobalVariables.toppingsCount;
+        money = GlobalVariables.globalMoney;
+
         price = 2.00f;
         weatherManager = FindObjectOfType<WeatherManager>(); // Find the WeatherManager in the scene
         UpdateUI();

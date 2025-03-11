@@ -9,11 +9,12 @@ public class MarketManagerScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int[,] marketItems = new int[5, 5];
-    public float money;
+    public static float money;
     public TMP_Text MoneyTXT;
 
     void Start()
     {
+        money = 1000f;
         MoneyTXT.text = money.ToString();
 
         //ID's
@@ -47,5 +48,14 @@ public class MarketManagerScript : MonoBehaviour
             MoneyTXT.text = money.ToString();
             ButtonRef.GetComponent<MarketButtonInfo>().QuantityTxt.text = marketItems[3, ButtonRef.GetComponent<MarketButtonInfo>().ItemID].ToString();
         }
+
+        GlobalVariables.iceCreamCount = marketItems[3,1];
+        GlobalVariables.syrupCount = marketItems[3,3];
+        GlobalVariables.toppingsCount = marketItems[3,4];
+    
+    }
+
+    public static float getMoney(){
+        return money;
     }
 }

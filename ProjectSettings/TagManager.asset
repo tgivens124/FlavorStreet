@@ -2,15 +2,8 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-<<<<<<< HEAD
-  serializedVersion: 2
-  tags:
-  - IceCreamTruck
-=======
   serializedVersion: 3
-  tags:
-  - Event
->>>>>>> 301342d0198a302079e62b3a370faf13fa0d1aec
+  tags: []
   layers:
   - Default
   - TransparentFX

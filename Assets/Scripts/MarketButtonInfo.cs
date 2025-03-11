@@ -16,7 +16,9 @@ public class MarketButtonInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MarketManager = GameObject.Find("MarketManager");
         PriceTxt.text = MarketManager.GetComponent<MarketManagerScript>().marketItems[2, ItemID].ToString();
         QuantityTxt.text = MarketManager.GetComponent<MarketManagerScript>().marketItems[3, ItemID].ToString();
+
     }
 }
