@@ -14,7 +14,7 @@ public class MarketManagerScript : MonoBehaviour
 
     void Start()
     {
-        money = 1000f;
+        money = 50f;
         MoneyTXT.text = money.ToString();
 
         //ID's
@@ -24,10 +24,10 @@ public class MarketManagerScript : MonoBehaviour
         marketItems[1, 4] = 4;
 
         //Price
-        marketItems[2, 1] = 100;
-        marketItems[2, 2] = 20;
-        marketItems[2, 3] = 30;
-        marketItems[2, 4] = 40;
+        marketItems[2, 1] = 7;
+        marketItems[2, 2] = 3;
+        marketItems[2, 3] = 4;
+        marketItems[2, 4] = 4;
 
         //Quantity
         marketItems[3, 1] = 0;
@@ -44,7 +44,7 @@ public class MarketManagerScript : MonoBehaviour
         if(money >= marketItems[2, ButtonRef.GetComponent<MarketButtonInfo>().ItemID])
         {
             money -= marketItems[2, ButtonRef.GetComponent<MarketButtonInfo>().ItemID];
-            marketItems[3, ButtonRef.GetComponent<MarketButtonInfo>().ItemID]++;
+            marketItems[3, ButtonRef.GetComponent<MarketButtonInfo>().ItemID] = marketItems[3, ButtonRef.GetComponent<MarketButtonInfo>().ItemID] +5;
             MoneyTXT.text = money.ToString();
             ButtonRef.GetComponent<MarketButtonInfo>().QuantityTxt.text = marketItems[3, ButtonRef.GetComponent<MarketButtonInfo>().ItemID].ToString();
         }
