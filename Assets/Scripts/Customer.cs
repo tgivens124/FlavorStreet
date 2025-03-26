@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Customer : MonoBehaviour
 {
@@ -17,6 +18,82 @@ public class Customer : MonoBehaviour
 
     // Index of the customer in the array
     public int customerIndex;
+
+    // Define arrays of sentences for feedback
+    string[] insufficientIceCreamFeedback = {
+        "I was really craving more ice cream. This is just a tease!",
+        "Barely any ice cream in the bowl—did you run out?",
+        "Not enough ice cream to satisfy my sweet tooth!",
+        "I could really use a bigger serving of ice cream next time.",
+        "Why so little ice cream? I feel short-changed."
+    };
+
+    string[] tooMuchIceCreamFeedback = {
+        "Wow, that's a mountain of ice cream—this is a workout to finish!",
+        "There’s so much ice cream; could you tone it down?",
+        "Too much ice cream for me; it’s overwhelming!",
+        "It’s a bit excessive—I’d prefer a more balanced portion of ice cream.",
+        "I love ice cream, but this feels like an ice cream avalanche!"
+    };
+
+    string[] perfectIceCreamFeedback = {
+    "Perfect amount of ice cream, just right!",
+    "You nailed the ice cream portion this time.",
+    "I love how balanced the ice cream quantity is.",
+    "You’ve nailed the portion—just enough to make me happy!",
+    "This is exactly the ice cream amount I was hoping for!"
+    };
+
+    string[] insufficientSyrupFeedback = { 
+        "Where's the syrup? This feels a bit dry.",
+        "Not enough syrup! I wanted it to drizzle with sweetness.",
+        "I could barely taste the syrup. Was it even there?",
+        "A little more syrup would have made this perfect.",
+        "You skimped on the syrup, and I’m feeling the lack of it."
+    };
+
+    string[] tooMuchSyrupFeedback = {
+        "Whoa! That's way too much syrup—it’s overpowering.",
+        "I'm practically swimming in syrup here. Tone it down a bit!",
+        "It’s too sweet! Did you accidentally pour the entire bottle?",
+        "A little less syrup, and this would have been amazing.",
+        "This is drowning in syrup. Next time, go easier on it." 
+    };
+
+    string[] perfectSyrupFeedback = { 
+        "Spot on with the syrup—just the right amount!",
+        "You nailed it! The syrup is balanced and delightful.",
+        "Perfect syrup drizzle. It enhances the flavors without overpowering.",
+        "This is exactly how syrup should be—sweet, but not too much!",
+        "Bravo! The syrup quantity is simply perfect."
+    };
+
+    string[] insufficientToppingsFeedback = {
+        "Where are the toppings? This looks so plain!",
+        "I was expecting a party of toppings, but got a lonely sprinkle.",
+        "Barely any toppings—I feel cheated!",
+        "A little more flair would’ve made this truly special.",
+        "Toppings are scarce; I guess it's a minimalist dessert."
+    };
+
+    string[] tooMuchToppingsFeedback = {
+        "Whoa, it’s overflowing with toppings! I can barely find the ice cream!",
+        "This mountain of toppings is overkill—it’s hard to enjoy.",
+        "Next time, maybe skip a topping or two. Less is more!",
+        "I love toppings, but this feels a bit excessive.",
+        "So many toppings, I don’t know where to start. A little overwhelming!"
+    };
+
+    string[] perfectToppingsFeedback = {
+        "You got it just right—the toppings are a perfect touch!",
+        "Balanced and beautiful! These toppings are exactly what I needed.",
+        "Not too little, not too much—the topping game is on point!",
+        "This feels crafted with care. The toppings add the perfect burst of flavor!",
+        "Absolutely perfect! The toppings are delightful without overshadowing the ice cream."
+    };
+
+    // Dynamic array to store customer feedback
+    //public static List<string> customerFeedbackMessages = new List<string>();
 
     void Start()
     {
@@ -87,12 +164,12 @@ public class Customer : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collision detected with: " + other.gameObject.name); // Log collision with any object
+        //Debug.Log("Collision detected with: " + other.gameObject.name); // Log collision with any object
 
         if (other.CompareTag("IceCreamTruck"))
         {
             // Handle interaction with the ice cream truck
-            Debug.Log("Customer reached the ice cream truck!");
+            //Debug.Log("Customer reached the ice cream truck!");
             // You can add logic here to handle the purchase or feedback process
             if(checkInventory() && Random.value <= purchaseProbability)
             {
@@ -140,18 +217,83 @@ public class Customer : MonoBehaviour
     {
         // Simple feedback calculation based on ingredients
         feedbackRating = (iceCream + syrup + toppings) / 3.0f;
+        string feedbackMessage = "";
         float tip;
+        int iceCreamScore, syrupScore, toppingsScore;
 
-        if (feedbackRating < 5)
+        // Customer preferences (randomized)
+        int preferredIceCream = Random.Range(3, 7); // Preferred quantity range
+        int preferredSyrup = Random.Range(2, 6);
+        int preferredToppings = Random.Range(1, 5);
+
+        if (iceCream < preferredIceCream) {
+            feedbackMessage += insufficientIceCreamFeedback[Random.Range(0, insufficientIceCreamFeedback.Length)] + " ";
+            iceCreamScore = 2; //Low score for insufficient amount of ice cream
+        }
+        else if (iceCream > preferredIceCream + 2) {
+            feedbackMessage += tooMuchIceCreamFeedback[Random.Range(0, tooMuchIceCreamFeedback.Length)] + " ";
+            iceCreamScore = 2; //Low score for too much ice cream
+        }
+        else {
+            feedbackMessage += perfectIceCreamFeedback[Random.Range(0, perfectIceCreamFeedback.Length)] + " ";
+            iceCreamScore = 5; //High score for perfect amount of ice cream
+        }
+
+        if (syrup < preferredSyrup)
         {
-            Debug.Log("Customer Feedback: Not enough ingredients, lower rating.");
-            tip = IceCreamTruckManager.Instance.price * .1f;
+            feedbackMessage += insufficientSyrupFeedback[Random.Range(0, insufficientSyrupFeedback.Length)] + " ";
+            syrupScore = 2; //Low score for insufficient amount of syrup
+        }
+        else if (syrup > preferredSyrup + 2)
+        {
+            feedbackMessage += tooMuchSyrupFeedback[Random.Range(0, tooMuchSyrupFeedback.Length)] + " ";
+            syrupScore = 2; //Low score for too much syrup
         }
         else
         {
-            Debug.Log("Customer Feedback: Satisfied with the ice cream.");
-            tip = IceCreamTruckManager.Instance.price * .5f;
+            feedbackMessage += perfectSyrupFeedback[Random.Range(0, perfectSyrupFeedback.Length)] + " ";
+            syrupScore = 5; //High score for perfect amount of syrup
         }
+
+        if (toppings < preferredToppings)
+        {
+            feedbackMessage += insufficientToppingsFeedback[Random.Range(0, insufficientToppingsFeedback.Length)] + " ";
+            toppingsScore = 2; //Low score for insufficient amount of toppings
+        }
+        else if (toppings > preferredToppings + 2)
+        {
+            feedbackMessage += tooMuchToppingsFeedback[Random.Range(0, tooMuchToppingsFeedback.Length)] + " ";
+            toppingsScore = 2; //Low score for too much toppings
+        }
+        else
+        {
+            feedbackMessage += perfectToppingsFeedback[Random.Range(0, perfectToppingsFeedback.Length)] + " ";
+            toppingsScore = 5; //High score for perfect amount of toppings
+        }
+
+        // Calculate overall rating based on feedback
+        feedbackRating = (iceCreamScore + syrupScore + toppingsScore) / 3.0f;
+
+        // Finalize feedback message based on rating
+        if (feedbackRating < 3)
+        {
+            feedbackMessage += "Overall, not very satisfied.";
+            tip = IceCreamTruckManager.Instance.price * 0.1f;
+        }
+        else if (feedbackRating < 5)
+        {
+            feedbackMessage += "Overall, somewhat satisfied.";
+            tip = IceCreamTruckManager.Instance.price * 0.3f;
+        }
+        else
+        {
+            feedbackMessage += "Overall, very satisfied!";
+            tip = IceCreamTruckManager.Instance.price * 0.5f;
+        }
+
+        // Display feedback and handle floating text
+        Debug.Log("Customer Feedback: " + feedbackMessage);
+        GlobalVariables.customerFeedbackMessages.Add(feedbackMessage);
 
         if (FloatingTextPrefab != null){
             StartCoroutine(ShowFloatingText(tip, .5f));
