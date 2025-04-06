@@ -17,6 +17,8 @@ public class SceneLoader : MonoBehaviour
         // Wait for the specified delay
         yield return new WaitForSeconds(delay);
 
+        GameObject persistentManager = GameObject.Find("Game Manager");
+        Destroy(persistentManager);
         // Load the next scene
         SceneManager.LoadScene(nextSceneName);
     }

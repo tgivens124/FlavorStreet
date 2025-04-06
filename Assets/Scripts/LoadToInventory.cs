@@ -24,6 +24,8 @@ public class LoadToInventory : MonoBehaviour
         Debug.Log("toppings: " + GlobalVariables.toppingsCount);
 
 
+        GameObject persistentManager = GameObject.Find("Game Manager");
+        Destroy(persistentManager);
         SceneManager.LoadScene(0);
     }
 
