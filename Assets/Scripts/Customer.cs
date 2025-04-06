@@ -21,75 +21,75 @@ public class Customer : MonoBehaviour
 
     // Define arrays of sentences for feedback
     string[] insufficientIceCreamFeedback = {
-        "I was really craving more ice cream. This is just a tease!",
-        "Barely any ice cream in the bowl—did you run out?",
-        "Not enough ice cream to satisfy my sweet tooth!",
-        "I could really use a bigger serving of ice cream next time.",
-        "Why so little ice cream? I feel short-changed."
+        "Ice Cream: I was really craving more ice cream. This is just a tease!\n",
+        "Ice Cream: Barely any ice cream in the bowl—did you run out?\n",
+        "Ice Cream: Not enough ice cream to satisfy my sweet tooth!\n",
+        "Ice Cream: I could really use a bigger serving of ice cream next time.\n",
+        "Ice Cream: Why so little ice cream? I feel short-changed.\n"
     };
 
     string[] tooMuchIceCreamFeedback = {
-        "Wow, that's a mountain of ice cream—this is a workout to finish!",
-        "There’s so much ice cream; could you tone it down?",
-        "Too much ice cream for me; it’s overwhelming!",
-        "It’s a bit excessive—I’d prefer a more balanced portion of ice cream.",
-        "I love ice cream, but this feels like an ice cream avalanche!"
+        "Ice Cream: Wow, that's a mountain of ice cream—this is a workout to finish!\n",
+        "Ice Cream: There’s so much ice cream; could you tone it down?\n",
+        "Ice Cream: Too much ice cream for me; it’s overwhelming!\n",
+        "Ice Cream: It’s a bit excessive—I’d prefer a more balanced portion of ice cream.\n",
+        "Ice Cream: I love ice cream, but this feels like an ice cream avalanche!\n"
     };
 
     string[] perfectIceCreamFeedback = {
-    "Perfect amount of ice cream, just right!",
-    "You nailed the ice cream portion this time.",
-    "I love how balanced the ice cream quantity is.",
-    "You’ve nailed the portion—just enough to make me happy!",
-    "This is exactly the ice cream amount I was hoping for!"
+    "Ice Cream: Perfect amount of ice cream, just right!\n",
+    "Ice Cream: You nailed the ice cream portion this time.\n",
+    "Ice Cream: I love how balanced the ice cream quantity is.\n",
+    "Ice Cream: You’ve nailed the portion—just enough to make me happy!\n",
+    "Ice Cream: This is exactly the ice cream amount I was hoping for!\n"
     };
 
-    string[] insufficientSyrupFeedback = { 
-        "Where's the syrup? This feels a bit dry.",
-        "Not enough syrup! I wanted it to drizzle with sweetness.",
-        "I could barely taste the syrup. Was it even there?",
-        "A little more syrup would have made this perfect.",
-        "You skimped on the syrup, and I’m feeling the lack of it."
+    string[] insufficientSyrupFeedback = {
+        "Syrup: Where's the syrup? This feels a bit dry.\n",
+        "Syrup: Not enough syrup! I wanted it to drizzle with sweetness.\n",
+        "Syrup: I could barely taste the syrup. Was it even there?\n",
+        "Syrup: A little more syrup would have made this perfect.\n",
+        "Syrup: You skimped on the syrup, and I’m feeling the lack of it.\n"
     };
 
     string[] tooMuchSyrupFeedback = {
-        "Whoa! That's way too much syrup—it’s overpowering.",
-        "I'm practically swimming in syrup here. Tone it down a bit!",
-        "It’s too sweet! Did you accidentally pour the entire bottle?",
-        "A little less syrup, and this would have been amazing.",
-        "This is drowning in syrup. Next time, go easier on it." 
+        "Syrup: Whoa! That's way too much syrup—it’s overpowering.\n",
+        "Syrup: I'm practically swimming in syrup here. Tone it down a bit!\n",
+        "Syrup: It’s too sweet! Did you accidentally pour the entire bottle?\n",
+        "Syrup: A little less syrup, and this would have been amazing.\n",
+        "Syrup: This is drowning in syrup. Next time, go easier on it.\n"
     };
 
-    string[] perfectSyrupFeedback = { 
-        "Spot on with the syrup—just the right amount!",
-        "You nailed it! The syrup is balanced and delightful.",
-        "Perfect syrup drizzle. It enhances the flavors without overpowering.",
-        "This is exactly how syrup should be—sweet, but not too much!",
-        "Bravo! The syrup quantity is simply perfect."
+    string[] perfectSyrupFeedback = {
+        "Syrup: Spot on with the syrup—just the right amount!\n",
+        "Syrup: You nailed it! The syrup is balanced and delightful.\n",
+        "Syrup: Perfect syrup drizzle. It enhances the flavors without overpowering.\n",
+        "Syrup: This is exactly how syrup should be—sweet, but not too much!\n",
+        "Syrup: Bravo! The syrup quantity is simply perfect.\n"
     };
 
     string[] insufficientToppingsFeedback = {
-        "Where are the toppings? This looks so plain!",
-        "I was expecting a party of toppings, but got a lonely sprinkle.",
-        "Barely any toppings—I feel cheated!",
-        "A little more flair would’ve made this truly special.",
-        "Toppings are scarce; I guess it's a minimalist dessert."
+        "Toppings: Where are the toppings? This looks so plain!\n",
+        "Toppings: I was expecting a party of toppings, but got a lonely sprinkle.\n",
+        "Toppings: Barely any toppings—I feel cheated!\n",
+        "Toppings: A little more flair would’ve made this truly special.\n",
+        "Toppings: Toppings are scarce; I guess it's a minimalist dessert.\n"
     };
 
     string[] tooMuchToppingsFeedback = {
-        "Whoa, it’s overflowing with toppings! I can barely find the ice cream!",
-        "This mountain of toppings is overkill—it’s hard to enjoy.",
-        "Next time, maybe skip a topping or two. Less is more!",
-        "I love toppings, but this feels a bit excessive.",
-        "So many toppings, I don’t know where to start. A little overwhelming!"
+        "Toppings: Whoa, it’s overflowing with toppings! I can barely find the ice cream!\n",
+        "Toppings: This mountain of toppings is overkill—it’s hard to enjoy.\n",
+        "Toppings: Next time, maybe skip a topping or two. Less is more!\n",
+        "Toppings: I love toppings, but this feels a bit excessive.\n",
+        "Toppings: So many toppings, I don’t know where to start. A little overwhelming!\n"
     };
 
     string[] perfectToppingsFeedback = {
-        "You got it just right—the toppings are a perfect touch!",
-        "Balanced and beautiful! These toppings are exactly what I needed.",
-        "Not too little, not too much—the topping game is on point!",
-        "This feels crafted with care. The toppings add the perfect burst of flavor!",
-        "Absolutely perfect! The toppings are delightful without overshadowing the ice cream."
+        "Toppings: You got it just right—the toppings are a perfect touch!\n",
+        "Toppings: Balanced and beautiful! These toppings are exactly what I needed.\n",
+        "Toppings: Not too little, not too much—the topping game is on point!\n",
+        "Toppings: This feels crafted with care. The toppings add the perfect burst of flavor!\n",
+        "Toppings: Absolutely perfect! The toppings are delightful without overshadowing the ice cream.\n"
     };
 
     // Dynamic array to store customer feedback
@@ -160,6 +160,8 @@ public class Customer : MonoBehaviour
                 isMoving = false;
             }
         }
+
+        GlobalVariables.globalMoney = IceCreamTruckManager.Instance.money;
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -1,27 +1,48 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI; // Or TMPro if using TextMeshPro
+using UnityEngine.UI;
 
-public class CustomerReviewsDisplay : MonoBehaviour
+public class ScrollableTextWithMouse : MonoBehaviour
 {
-    // Reference to a UI Text or TextMeshProUGUI element for displaying reviews
-    public TextMeshProUGUI reviewText; // Or public TextMeshProUGUI reviewText;
+    public TextMeshProUGUI reviewText; // Reference to your Text component
+    public float scrollSpeed = 50f; // Speed of scrolling
+    private RectTransform textRect; // RectTransform of the text
+    private float viewportHeight; // Height of the visible area (for clamping)
+    private float contentHeight; // Total height of the content (text)
 
     void Start()
     {
-        // Check if the global feedback list is not empty
+        textRect = reviewText.GetComponent<RectTransform>();
+
+        // Calculate the content height
+        contentHeight = reviewText.preferredHeight;
+
+        // Get the height of the viewport (parent RectTransform)
+        RectTransform viewport = textRect.parent.GetComponent<RectTransform>();
+        viewportHeight = viewport.rect.height;
+
+        // Check if reviews exist
         if (GlobalVariables.customerFeedbackMessages != null && GlobalVariables.customerFeedbackMessages.Count > 0)
         {
-            // Combine all reviews into a single string with line breaks
-            string allReviews = string.Join("\n\n", GlobalVariables.customerFeedbackMessages);
-
-            // Display the reviews on the UI element
-            reviewText.text = allReviews;
+            reviewText.text = string.Join("\n\n", GlobalVariables.customerFeedbackMessages);
+            // Adjust the text container size
+            textRect.sizeDelta = new Vector2(textRect.sizeDelta.x, contentHeight);
         }
         else
         {
-            // Display a fallback message if no reviews are available
             reviewText.text = "No customer reviews available yet!";
+        }
+    }
+
+    void Update()
+    {
+        // Listen for mouse scroll input
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll != 0)
+        {
+            // Adjust the position of the text based on scroll input
+            textRect.anchoredPosition -= new Vector2(0, scroll * scrollSpeed);
         }
     }
 }
