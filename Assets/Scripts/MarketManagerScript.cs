@@ -14,24 +14,27 @@ public class MarketManagerScript : MonoBehaviour
 
     void Start()
     {
-        money = 50f;
-        MoneyTXT.text = money.ToString();
+        if (GlobalVariables.globalCurrentMoney == null || GlobalVariables.globalCurrentMoney == 0){
+            money = 50f;
+        }
+        else {
+            money = (float)System.Math.Round(GlobalVariables.globalCurrentMoney, 2);
+        }
+
+        MoneyTXT.text = money.ToString("F2");
 
         //ID's
         marketItems[1, 1] = 1;
-        marketItems[1, 2] = 2;
         marketItems[1, 3] = 3;
         marketItems[1, 4] = 4;
 
         //Price
         marketItems[2, 1] = 7;
-        marketItems[2, 2] = 3;
         marketItems[2, 3] = 4;
         marketItems[2, 4] = 4;
 
         //Quantity
         marketItems[3, 1] = 0;
-        marketItems[3, 2] = 0;
         marketItems[3, 3] = 0;
         marketItems[3, 4] = 0;
     }
@@ -52,6 +55,7 @@ public class MarketManagerScript : MonoBehaviour
         GlobalVariables.iceCreamCount = marketItems[3,1];
         GlobalVariables.syrupCount = marketItems[3,3];
         GlobalVariables.toppingsCount = marketItems[3,4];
+        GlobalVariables.globalCurrentMoney = money;
     
     }
 

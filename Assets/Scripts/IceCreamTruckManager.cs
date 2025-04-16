@@ -42,9 +42,12 @@ public class IceCreamTruckManager : MonoBehaviour
         iceCream = GlobalVariables.iceCreamCount;
         syrup = GlobalVariables.syrupCount;
         toppings = GlobalVariables.toppingsCount;
-        money = GlobalVariables.globalMoney;
+        money = GlobalVariables.globalCurrentMoney;
+        GlobalVariables.globalStartingDayMoney = money;
+        GlobalVariables.customersServed = 0;
 
-        price = 4.00f;
+
+        price = 5.50f;
         weatherManager = FindObjectOfType<WeatherManager>(); // Find the WeatherManager in the scene
         UpdateUI();
 
@@ -58,7 +61,10 @@ public class IceCreamTruckManager : MonoBehaviour
         weatherManager.UpdateWeather();
 
         // Create customers (you can adjust the number as needed)
-        customers = new Customer[20];
+        //customers = new Customer[20];
+        //for debugging
+        customers = new Customer[5];
+
         for (int i = 0; i < customers.Length; i++)
         {
             GameObject customerObject = new GameObject("Customer");

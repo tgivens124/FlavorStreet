@@ -16,9 +16,9 @@ public class LoadToInventory : MonoBehaviour
     {
         Debug.Log("button click recognized");
 
-        GlobalVariables.globalMoney = MarketManagerScript.getMoney();
+        //GlobalVariables.globalCurrentMoney = MarketManagerScript.getMoney();
 
-        Debug.Log("money: " + GlobalVariables.globalMoney);
+        Debug.Log("money: " + GlobalVariables.globalCurrentMoney);
         Debug.Log("syrup: " + GlobalVariables.syrupCount);
         Debug.Log("ice cream: " + GlobalVariables.iceCreamCount);
         Debug.Log("toppings: " + GlobalVariables.toppingsCount);

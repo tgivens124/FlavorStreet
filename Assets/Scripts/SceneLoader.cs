@@ -10,6 +10,8 @@ public class SceneLoader : MonoBehaviour
     {
         // Start the coroutine to wait for one minute
         StartCoroutine(LoadSceneAfterDelay(30f)); // Delay of 60 seconds (1 minute)
+        // debugging
+        StartCoroutine(LoadSceneAfterDelay(15f)); // Delay of 60 seconds (1 minute)
     }
 
     IEnumerator LoadSceneAfterDelay(float delay)
