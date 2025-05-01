@@ -91,14 +91,21 @@ public class Customer : MonoBehaviour
             if(Random.value <= purchaseProbability)
             {
                 IceCreamTruckManager.Instance.totalServingsSold += 1;
-                IceCreamTruckManager.Instance.money += IceCreamTruckManager.Instance.price;
+                IceCreamTruckManager.Instance.money +=  RecipeManager.currentPrice;
                 LeaveFeedback(IceCreamTruckManager.Instance.iceCream, IceCreamTruckManager.Instance.syrup, IceCreamTruckManager.Instance.toppings);
-                IceCreamTruckManager.Instance.iceCream -= 1;
-                IceCreamTruckManager.Instance.syrup -= 1;
-                IceCreamTruckManager.Instance.toppings -= 1;
+                IceCreamTruckManager.Instance.iceCream -= RecipeManager.iceCreamAmount;
+                IceCreamTruckManager.Instance.syrup -= RecipeManager.syrupAmount;
+                IceCreamTruckManager.Instance.toppings -= RecipeManager.toppingsAmount;
                 Invoke("StopThenWalk", 1.15f);
+<<<<<<< Updated upstream
                 //StartCoroutine(StopThenWalk(2f));
 
+=======
+                GlobalVariables.customersServed++;
+                if (FloatingTextPrefab != null){
+                    StartCoroutine(ShowFloatingText(RecipeManager.currentPrice, 0f));
+                }
+>>>>>>> Stashed changes
             }
         }
     }
