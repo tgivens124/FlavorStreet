@@ -54,7 +54,7 @@ public class MarketManagerScript : MonoBehaviour
 
         GlobalVariables.iceCreamCount = marketItems[3,1];
         GlobalVariables.syrupCount = marketItems[3,3];
-        GlobalVariables.toppingsCount = marketItems[3,4];
+        GlobalVariables.toppingsCount = marketItems[3,2];
         GlobalVariables.globalCurrentMoney = money;
     
     }

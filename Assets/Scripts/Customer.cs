@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 public class Customer : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Customer : MonoBehaviour
 
     // Index of the customer in the array
     public int customerIndex;
+
+    //price of ice cream set by player
+    public float price;
 
     // Define arrays of sentences for feedback
     string[] insufficientIceCreamFeedback = {
@@ -134,6 +138,8 @@ public class Customer : MonoBehaviour
         float randomDelay = Random.Range(.8f, 1f);
         delay = customerIndex * randomDelay; // Adjust the multiplier as needed
 
+      
+
     
     }
 
@@ -162,6 +168,7 @@ public class Customer : MonoBehaviour
         }
 
         GlobalVariables.globalCurrentMoney = IceCreamTruckManager.Instance.money;
+        price = RecipeManager.currentPrice;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -176,7 +183,7 @@ public class Customer : MonoBehaviour
             if(checkInventory() && Random.value <= purchaseProbability)
             {
                 IceCreamTruckManager.Instance.totalServingsSold += 1;
-                IceCreamTruckManager.Instance.money += IceCreamTruckManager.Instance.price;
+                IceCreamTruckManager.Instance.money += price;
                 LeaveFeedback(IceCreamTruckManager.Instance.iceCream, IceCreamTruckManager.Instance.syrup, IceCreamTruckManager.Instance.toppings);
                 IceCreamTruckManager.Instance.iceCream -= 1;
                 IceCreamTruckManager.Instance.syrup -= 1;
@@ -184,7 +191,7 @@ public class Customer : MonoBehaviour
                 Invoke("StopThenWalk", 1.15f);
                 GlobalVariables.customersServed++;
                 if (FloatingTextPrefab != null){
-                    StartCoroutine(ShowFloatingText(IceCreamTruckManager.Instance.price, 0f));
+                    StartCoroutine(ShowFloatingText(price, 0f));
                 }
             }
         }
@@ -281,17 +288,17 @@ public class Customer : MonoBehaviour
         if (feedbackRating < 3)
         {
             feedbackMessage += "Overall, not very satisfied.";
-            tip = IceCreamTruckManager.Instance.price * 0.1f;
+            tip = price * 0.1f;
         }
         else if (feedbackRating < 5)
         {
             feedbackMessage += "Overall, somewhat satisfied.";
-            tip = IceCreamTruckManager.Instance.price * 0.3f;
+            tip = price * 0.3f;
         }
         else
         {
             feedbackMessage += "Overall, very satisfied!";
-            tip = IceCreamTruckManager.Instance.price * 0.5f;
+            tip = price * 0.5f;
         }
 
         // Display feedback and handle floating text
