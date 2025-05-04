@@ -184,7 +184,7 @@ public class Customer : MonoBehaviour
             {
                 IceCreamTruckManager.Instance.totalServingsSold += 1;
                 IceCreamTruckManager.Instance.money += price;
-                LeaveFeedback(IceCreamTruckManager.Instance.iceCream, IceCreamTruckManager.Instance.syrup, IceCreamTruckManager.Instance.toppings);
+                LeaveFeedback(GlobalVariables.globalIceCreamAmount, GlobalVariables.globalSyrupAmount, GlobalVariables.globalToppingsAmount);//IceCreamTruckManager.Instance.iceCream, IceCreamTruckManager.Instance.syrup, IceCreamTruckManager.Instance.toppings);
                 IceCreamTruckManager.Instance.iceCream -= GlobalVariables.globalIceCreamAmount;
                 IceCreamTruckManager.Instance.syrup -= GlobalVariables.globalSyrupAmount;
                 IceCreamTruckManager.Instance.toppings -= GlobalVariables.globalToppingsAmount;
@@ -232,9 +232,9 @@ public class Customer : MonoBehaviour
         int iceCreamScore, syrupScore, toppingsScore;
 
         // Customer preferences (randomized)
-        int preferredIceCream = Random.Range(3, 7); // Preferred quantity range
-        int preferredSyrup = Random.Range(2, 6);
-        int preferredToppings = Random.Range(1, 5);
+        int preferredIceCream = Random.Range(3, 7) + 2; // Preferred quantity range
+        int preferredSyrup = Random.Range(2, 6) + 2;
+        int preferredToppings = Random.Range(1, 5) + 2;
 
         if (iceCream < preferredIceCream) {
             feedbackMessage += insufficientIceCreamFeedback[Random.Range(0, insufficientIceCreamFeedback.Length)] + " ";

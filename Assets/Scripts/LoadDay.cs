@@ -16,6 +16,10 @@ public class LoadDay : MonoBehaviour
     }
 
     void LoadNextDay(){
+
+        GlobalVariables.customerFeedbackMessages.Clear();
+
+
         Debug.Log("button click recognized");
 
         if (nextSceneName == "Day_1"){

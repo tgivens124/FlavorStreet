@@ -16,6 +16,4 @@ public class GlobalVariables : MonoBehaviour
     public static int globalToppingsAmount;
 
     public static List<string> customerFeedbackMessages = new List<string>();
-
-
 }
