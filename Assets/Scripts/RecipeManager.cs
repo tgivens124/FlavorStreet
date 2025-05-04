@@ -48,18 +48,21 @@ public class RecipeManager : MonoBehaviour
     {
         iceCreamAmount = Mathf.RoundToInt(value);
         iceCreamText.text = iceCreamAmount.ToString();
+        GlobalVariables.globalIceCreamAmount = iceCreamAmount;
     }
 
     void UpdateSyrupAmount(float value)
     {
         syrupAmount = Mathf.RoundToInt(value);
         syrupText.text = syrupAmount.ToString();
+        GlobalVariables.globalSyrupAmount = syrupAmount;
     }
 
     void UpdateToppingsAmount(float value)
     {
         toppingsAmount = Mathf.RoundToInt(value);
         toppingsText.text = toppingsAmount.ToString();
+        GlobalVariables.globalToppingsAmount = toppingsAmount;
     }
 
     void UpdatePrice(string text)

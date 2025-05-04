@@ -11,6 +11,10 @@ public class GlobalVariables : MonoBehaviour
     public static int toppingsCount;
     public static int customersServed;
 
+    public static int globalIceCreamAmount;
+    public static int globalSyrupAmount;
+    public static int globalToppingsAmount;
+
     public static List<string> customerFeedbackMessages = new List<string>();
 
 

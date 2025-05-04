@@ -185,9 +185,9 @@ public class Customer : MonoBehaviour
                 IceCreamTruckManager.Instance.totalServingsSold += 1;
                 IceCreamTruckManager.Instance.money += price;
                 LeaveFeedback(IceCreamTruckManager.Instance.iceCream, IceCreamTruckManager.Instance.syrup, IceCreamTruckManager.Instance.toppings);
-                IceCreamTruckManager.Instance.iceCream -= 1;
-                IceCreamTruckManager.Instance.syrup -= 1;
-                IceCreamTruckManager.Instance.toppings -= 1;
+                IceCreamTruckManager.Instance.iceCream -= GlobalVariables.globalIceCreamAmount;
+                IceCreamTruckManager.Instance.syrup -= GlobalVariables.globalSyrupAmount;
+                IceCreamTruckManager.Instance.toppings -= GlobalVariables.globalToppingsAmount;
                 Invoke("StopThenWalk", 1.15f);
                 GlobalVariables.customersServed++;
                 if (FloatingTextPrefab != null){
