@@ -24,8 +24,8 @@ public class LoadDay : MonoBehaviour
 
         if (nextSceneName == "Day_1"){
             GlobalVariables.globalCurrentMoney = MarketManagerScript.getMoney();
-            GlobalVariables.globalStartingDayMoney = GlobalVariables.globalCurrentMoney;
             GlobalVariables.dayNumber++;
+            GlobalVariables.customersServed = 0;
         }
         
         Debug.Log("money: " + GlobalVariables.globalCurrentMoney);

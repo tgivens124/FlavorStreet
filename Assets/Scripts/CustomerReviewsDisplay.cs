@@ -23,7 +23,7 @@ public class ScrollableTextWithMouse : MonoBehaviour
         }
         else
         {
-            Content.text = "No customer reviews available yet!";
+            Content.text = "No customer reviews available yet! Try improving your prices or buying more ingredients.";
         }
     }
 

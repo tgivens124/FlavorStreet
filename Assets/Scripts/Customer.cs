@@ -139,9 +139,8 @@ public class Customer : MonoBehaviour
         delay = customerIndex * randomDelay; // Adjust the multiplier as needed
 
         price = RecipeManager.currentPrice;
-
-
-    
+        GlobalVariables.globalCurrentMoney = IceCreamTruckManager.Instance.money;
+   
     }
 
     void Update()
@@ -200,6 +199,7 @@ public class Customer : MonoBehaviour
                 GlobalVariables.iceCreamCount = IceCreamTruckManager.Instance.iceCream;
                 GlobalVariables.syrupCount = IceCreamTruckManager.Instance.syrup;
                 GlobalVariables.toppingsCount = IceCreamTruckManager.Instance.toppings;
+                GlobalVariables.customersServed++;
             }
         }
     }

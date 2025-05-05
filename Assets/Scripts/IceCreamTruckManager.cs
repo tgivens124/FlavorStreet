@@ -43,7 +43,6 @@ public class IceCreamTruckManager : MonoBehaviour
         syrup = GlobalVariables.syrupCount;
         toppings = GlobalVariables.toppingsCount;
         money = GlobalVariables.globalCurrentMoney;
-        GlobalVariables.globalStartingDayMoney = money;
         GlobalVariables.customersServed = 0;
 
 

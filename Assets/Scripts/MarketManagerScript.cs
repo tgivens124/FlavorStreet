@@ -21,6 +21,8 @@ public class MarketManagerScript : MonoBehaviour
             money = (float)System.Math.Round(GlobalVariables.globalCurrentMoney, 2);
         }
 
+        GlobalVariables.globalStartingDayMoney = money;
+
         MoneyTXT.text = money.ToString("F2");
 
         //ID's
