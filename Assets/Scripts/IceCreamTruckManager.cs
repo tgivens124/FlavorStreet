@@ -47,7 +47,6 @@ public class IceCreamTruckManager : MonoBehaviour
         GlobalVariables.customersServed = 0;
 
 
-        price = 5.50f;
         weatherManager = FindObjectOfType<WeatherManager>(); // Find the WeatherManager in the scene
         UpdateUI();
 

@@ -234,10 +234,10 @@ public class Customer : MonoBehaviour
         if (price >= 30f){
             purchaseProbability = .01f; 
         }
-        else if (price >= 22f){
+        else if (price >= 20f){
             purchaseProbability = .10f; 
         }
-        else if(price >= 16){
+        else if(price >= 13){
             purchaseProbability -= .10f;
         }
         else if(price <= 11){
@@ -317,12 +317,12 @@ public class Customer : MonoBehaviour
         else if (feedbackRating < 5)
         {
             feedbackMessage += "Overall, somewhat satisfied.";
-            tip = price * 0.3f;
+            tip = price * 0.25f;
         }
         else
         {
             feedbackMessage += "Overall, very satisfied!";
-            tip = price * 0.5f;
+            tip = price * 0.6f;
         }
 
         // Display feedback and handle floating text
