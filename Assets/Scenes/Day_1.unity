@@ -4241,6 +4241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc29b0d5f3b401b47baf58491ead3943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weatherEnum: 0
   currentWeather: 0
   temperatureText: {fileID: 288587341}
 --- !u!4 &290666729
@@ -16064,6 +16065,7 @@ MonoBehaviour:
   price: 0
   weatherManager: {fileID: 290666728}
   customerSprite: {fileID: 21300000, guid: a621df66ad9d71842968dc4b770b36d4, type: 3}
+  customerSprite2: {fileID: 21300000, guid: bdf1f1efd8c505c41b099a9df5439c75, type: 3}
   minX: 10.22
   maxX: 10.22
   minY: -0.74
