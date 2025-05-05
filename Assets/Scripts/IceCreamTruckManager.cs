@@ -27,6 +27,7 @@ public class IceCreamTruckManager : MonoBehaviour
     public float price;
     public WeatherManager weatherManager; // Reference to WeatherManager
     public Sprite customerSprite; // Reference to the customer sprite
+    public Sprite customerSprite2; // Reference to second customer sprite
     public float minX, maxX, minY, maxY; // Define the boundaries for customer positions
 
     public int totalServingsSold;
@@ -73,7 +74,8 @@ public class IceCreamTruckManager : MonoBehaviour
             // Ensure customerSprite is assigned
             if (customerSprite != null)
             {
-                customers[i].spriteRenderer.sprite = customerSprite; // Assign the customer sprite
+                //customers[i].spriteRenderer.sprite = customerSprite; // Assign the customer sprite
+                customers[i].spriteRenderer.sprite = Random.value < 0.5f ? customerSprite2 : customerSprite;
             }
             else
             {
