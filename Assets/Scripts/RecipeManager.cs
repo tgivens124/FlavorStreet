@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class RecipeManager : MonoBehaviour
 {
@@ -39,9 +40,9 @@ public class RecipeManager : MonoBehaviour
 
     public void LimitSlidersByInventory()
     {
-        iceCreamSlider.maxValue = GlobalVariables.iceCreamCount;
-        syrupSlider.maxValue = GlobalVariables.syrupCount;
-        toppingsSlider.maxValue = GlobalVariables.toppingsCount;
+        iceCreamSlider.maxValue = Math.Min(15, GlobalVariables.iceCreamCount);
+        syrupSlider.maxValue = Math.Min(10, GlobalVariables.syrupCount);
+        toppingsSlider.maxValue = Math.Min(10, GlobalVariables.toppingsCount);
     }
 
     void UpdateIceCreamAmount(float value)
@@ -72,5 +73,6 @@ public class RecipeManager : MonoBehaviour
         {
             currentPrice = price;
         }
+        
     }
 }

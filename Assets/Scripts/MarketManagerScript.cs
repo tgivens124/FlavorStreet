@@ -15,7 +15,7 @@ public class MarketManagerScript : MonoBehaviour
     void Start()
     {
         if (GlobalVariables.globalCurrentMoney == null || GlobalVariables.globalCurrentMoney == 0){
-            money = 50f;
+            money = 60f;
         }
         else {
             money = (float)System.Math.Round(GlobalVariables.globalCurrentMoney, 2);
@@ -25,18 +25,30 @@ public class MarketManagerScript : MonoBehaviour
 
         //ID's
         marketItems[1, 1] = 1;
+        marketItems[1, 2] = 2;
         marketItems[1, 3] = 3;
         marketItems[1, 4] = 4;
 
         //Price
-        marketItems[2, 1] = 7;
-        marketItems[2, 3] = 4;
-        marketItems[2, 4] = 4;
+        marketItems[2, 1] = 3;
+        marketItems[2, 2] = 2;
+        marketItems[2, 3] = 2;
+        marketItems[2, 4] = 2;
 
-        //Quantity
-        marketItems[3, 1] = 0;
-        marketItems[3, 3] = 0;
-        marketItems[3, 4] = 0;
+        if(GlobalVariables.dayNumber == 0){
+            //Quantity
+            marketItems[3, 1] = 0;
+            marketItems[3, 2] = 0;
+            marketItems[3, 3] = 0;
+            marketItems[3, 4] = 0;
+        }
+        else {
+            marketItems[3, 1] = GlobalVariables.iceCreamCount;
+            marketItems[3, 2] = GlobalVariables.toppingsCount;
+            marketItems[3, 3] = GlobalVariables.syrupCount;
+            marketItems[3, 4] = 0;
+        }
+        
     }
 
     // Update is called once per frame

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class WeatherManager : MonoBehaviour
 {
     public enum Weather { Hot, Cold }
+    public Weather weatherEnum;
     public Weather currentWeather;
     public Text temperatureText; // Reference to the temperature Text component
 
@@ -13,11 +14,20 @@ public class WeatherManager : MonoBehaviour
         SetRandomWeather();
     }
 
+
     void SetRandomWeather()
     {
         // Randomly set weather to Hot or Cold for simplicity
         currentWeather = (Random.value > 0.5f) ? Weather.Hot : Weather.Cold;
         UpdateTemperatureText();
+        if (currentWeather == Weather.Hot)
+        {
+            GlobalVariables.currentWeather = "Hot";
+        }
+        else if (currentWeather == Weather.Cold)
+        {
+            GlobalVariables.currentWeather = "Cold";
+        }
     }
 
     public void UpdateWeather()
@@ -30,11 +40,11 @@ public class WeatherManager : MonoBehaviour
     {
         if (currentWeather == Weather.Hot)
         {
-            temperatureText.text = "Temperature: Hot (30°C)";
+            temperatureText.text = "Temperature: Hot (30ï¿½C)";
         }
         else if (currentWeather == Weather.Cold)
         {
-            temperatureText.text = "Temperature: Cold (10°C)";
+            temperatureText.text = "Temperature: Cold (10ï¿½C)";
         }
     }
 }

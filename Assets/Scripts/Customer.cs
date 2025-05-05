@@ -8,7 +8,7 @@ public class Customer : MonoBehaviour
 {
     public enum Weather { Hot, Cold }
     public GameObject FloatingTextPrefab;
-    public Weather currentWeather;
+    public string currentWeather;
     public float purchaseProbability;
     public float feedbackRating;
     public SpriteRenderer spriteRenderer; // Reference to SpriteRenderer
@@ -124,7 +124,7 @@ public class Customer : MonoBehaviour
         spriteRenderer.sortingOrder = 4;
 
         // Set initial weather (this can be managed by another script or manager)
-        currentWeather = Weather.Hot;
+        currentWeather = GlobalVariables.currentWeather;
 
         // Calculate purchase probability based on weather
         UpdatePurchaseProbability();
@@ -138,7 +138,8 @@ public class Customer : MonoBehaviour
         float randomDelay = Random.Range(.8f, 1f);
         delay = customerIndex * randomDelay; // Adjust the multiplier as needed
 
-      
+        price = RecipeManager.currentPrice;
+
 
     
     }
@@ -151,6 +152,9 @@ public class Customer : MonoBehaviour
             delay -= Time.deltaTime;
             return;
         }
+        price = RecipeManager.currentPrice;
+        UpdatePurchaseProbability();
+
 
         // Start moving the customer after the delay
         isMoving = true;
@@ -168,7 +172,6 @@ public class Customer : MonoBehaviour
         }
 
         GlobalVariables.globalCurrentMoney = IceCreamTruckManager.Instance.money;
-        price = RecipeManager.currentPrice;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -193,14 +196,17 @@ public class Customer : MonoBehaviour
                 if (FloatingTextPrefab != null){
                     StartCoroutine(ShowFloatingText(price, 0f));
                 }
+
+                GlobalVariables.iceCreamCount = IceCreamTruckManager.Instance.iceCream;
+                GlobalVariables.syrupCount = IceCreamTruckManager.Instance.syrup;
+                GlobalVariables.toppingsCount = IceCreamTruckManager.Instance.toppings;
             }
         }
     }
-
     bool checkInventory(){
-        if( IceCreamTruckManager.Instance.iceCream==0 ||
-        IceCreamTruckManager.Instance.syrup==0 ||
-        IceCreamTruckManager.Instance.toppings==0){
+        if( IceCreamTruckManager.Instance.iceCream - RecipeManager.iceCreamAmount <= 0 ||
+        IceCreamTruckManager.Instance.syrup - RecipeManager.syrupAmount <= 0 ||
+        IceCreamTruckManager.Instance.toppings - RecipeManager.toppingsAmount <= 0){
             return false;
         } 
         return true;
@@ -213,14 +219,32 @@ public class Customer : MonoBehaviour
 
     public void UpdatePurchaseProbability()
     {
-        if (currentWeather == Weather.Hot)
+        if (currentWeather == "Hot")
         {
-            purchaseProbability = 0.6f; // 80% chance of buying ice cream
+            purchaseProbability = 0.6f; 
         }
-        else if (currentWeather == Weather.Cold)
+        else if (currentWeather == "Cold")
         {
-            purchaseProbability = 0.25f; // 30% chance of buying ice cream
+            purchaseProbability = 0.3f; // 30% chance of buying ice cream
         }
+
+        if (price >= 50f){
+            purchaseProbability = 0f; 
+        }
+        if (price >= 30f){
+            purchaseProbability = .01f; 
+        }
+        else if (price >= 22f){
+            purchaseProbability = .10f; 
+        }
+        else if(price >= 16){
+            purchaseProbability -= .10f;
+        }
+        else if(price <= 11){
+            purchaseProbability += .20f;
+        }
+        Debug.Log("Price:" + price);
+        Debug.Log("Probability:" + purchaseProbability);
     }
 
     public void LeaveFeedback(int iceCream, int syrup, int toppings)

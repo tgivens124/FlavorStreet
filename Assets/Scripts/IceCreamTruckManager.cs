@@ -61,9 +61,9 @@ public class IceCreamTruckManager : MonoBehaviour
         weatherManager.UpdateWeather();
 
         // Create customers (you can adjust the number as needed)
-        //customers = new Customer[20];
+        customers = new Customer[20];
         //for debugging
-        customers = new Customer[5];
+        //customers = new Customer[5];
 
         for (int i = 0; i < customers.Length; i++)
         {
@@ -82,7 +82,7 @@ public class IceCreamTruckManager : MonoBehaviour
                 Debug.LogError("Customer sprite is not assigned in the IceCreamTruckManager script.");
             }
 
-            customers[i].currentWeather = (Customer.Weather)weatherManager.currentWeather;
+            customers[i].currentWeather = GlobalVariables.currentWeather;
             customers[i].transform.position = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), 0); // Set random initial position
             customers[i].customerIndex = i; // Set the customer index
         }
