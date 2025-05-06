@@ -7,12 +7,12 @@ public class LoadDay : MonoBehaviour
 
     public string nextSceneName; // The name of the next scene to load
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         UnityEngine.UI.Button btn = GetComponent<UnityEngine.UI.Button>();
         btn.onClick.AddListener(LoadNextDay);
+
     }
 
     void LoadNextDay(){
@@ -21,7 +21,6 @@ public class LoadDay : MonoBehaviour
 
 
         Debug.Log("button click recognized");
-
 
         
 

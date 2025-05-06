@@ -7,7 +7,7 @@ public class ReviewScene : MonoBehaviour
     public TextMeshProUGUI moneyText; // Reference to your Text component
     public TextMeshProUGUI dayText; // Reference to your Text component
     public TextMeshProUGUI moneyMadeText; // Reference to your Text component
-    public TextMeshProUGUI customerServedText; // Reference to your Text component
+    public GameObject customerServedText; // Reference to your Text component
     public float roundedMoney;
 
 
@@ -16,13 +16,13 @@ public class ReviewScene : MonoBehaviour
     {
         //MoneyText
         roundedMoney = (float)System.Math.Round(GlobalVariables.globalCurrentMoney, 2); // Rounds to 2 decimal places
-        moneyText.text = "CurrentMoney: $" + roundedMoney.ToString("F2");
+        moneyText.text = "Money: $" + roundedMoney.ToString("F2");
 
         //DayText
         dayText.text = "Day: " + GlobalVariables.dayNumber;
 
         //CustomersServed
-        customerServedText.text = "Customers Served: " + GlobalVariables.customersServed;
+        customerServedText.GetComponent<UnityEngine.UI.Text>().text = "Customers Served: " + GlobalVariables.customersServed;
 
         //MoneyMade
         roundedMoney = (float)System.Math.Round(GlobalVariables.globalCurrentMoney - GlobalVariables.globalStartingDayMoney, 2); // Rounds to 2 decimal places

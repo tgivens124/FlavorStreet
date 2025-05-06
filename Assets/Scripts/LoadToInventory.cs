@@ -27,11 +27,11 @@ public class LoadToInventory : MonoBehaviour
 
         GameObject persistentManager = GameObject.Find("Game Manager");
         Destroy(persistentManager);
-        if (GlobalVariables.globalCurrentMoney >= 70){
+        if (GlobalVariables.globalCurrentMoney >= 500){
             SceneManager.LoadScene("EndGame");
         }
         else{
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("SampleScene");
         }
         
     }

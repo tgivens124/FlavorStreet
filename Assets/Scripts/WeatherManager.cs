@@ -40,11 +40,11 @@ public class WeatherManager : MonoBehaviour
     {
         if (currentWeather == Weather.Hot)
         {
-            temperatureText.text = "Temperature: Hot (30�C)";
+            temperatureText.text = "Temperature: Hot (30C)";
         }
         else if (currentWeather == Weather.Cold)
         {
-            temperatureText.text = "Temperature: Cold (10�C)";
+            temperatureText.text = "Temperature: Cold (10C)";
         }
     }
 }
