@@ -22,7 +22,11 @@ public class LoadDay : MonoBehaviour
 
         Debug.Log("button click recognized");
 
+
+        
+
         if (nextSceneName == "Day_1"){
+            
             GlobalVariables.globalCurrentMoney = MarketManagerScript.getMoney();
             GlobalVariables.dayNumber++;
             GlobalVariables.customersServed = 0;

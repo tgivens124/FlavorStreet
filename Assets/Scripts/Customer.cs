@@ -199,14 +199,13 @@ public class Customer : MonoBehaviour
                 GlobalVariables.iceCreamCount = IceCreamTruckManager.Instance.iceCream;
                 GlobalVariables.syrupCount = IceCreamTruckManager.Instance.syrup;
                 GlobalVariables.toppingsCount = IceCreamTruckManager.Instance.toppings;
-                GlobalVariables.customersServed++;
             }
         }
     }
     bool checkInventory(){
-        if( IceCreamTruckManager.Instance.iceCream - RecipeManager.iceCreamAmount <= 0 ||
-        IceCreamTruckManager.Instance.syrup - RecipeManager.syrupAmount <= 0 ||
-        IceCreamTruckManager.Instance.toppings - RecipeManager.toppingsAmount <= 0){
+        if( IceCreamTruckManager.Instance.iceCream - RecipeManager.iceCreamAmount < 0 ||
+        IceCreamTruckManager.Instance.syrup - RecipeManager.syrupAmount < 0 ||
+        IceCreamTruckManager.Instance.toppings - RecipeManager.toppingsAmount < 0){
             return false;
         } 
         return true;

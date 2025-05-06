@@ -10,6 +10,7 @@ public class LoadToInventory : MonoBehaviour
     {
         UnityEngine.UI.Button btn = GetComponent<UnityEngine.UI.Button>();
         btn.onClick.AddListener(LoadInventoryScreen);
+        
     }
 
     void LoadInventoryScreen()
@@ -26,7 +27,13 @@ public class LoadToInventory : MonoBehaviour
 
         GameObject persistentManager = GameObject.Find("Game Manager");
         Destroy(persistentManager);
-        SceneManager.LoadScene(0);
+        if (GlobalVariables.globalCurrentMoney >= 70){
+            SceneManager.LoadScene("EndGame");
+        }
+        else{
+            SceneManager.LoadScene(0);
+        }
+        
     }
 
 }
