@@ -25,19 +25,19 @@ public class Customer : MonoBehaviour
 
     // Define arrays of sentences for feedback
     string[] insufficientIceCreamFeedback = {
-        "Ice Cream: I was really craving more ice cream. This is just a tease!\n",
-        "Ice Cream: Barely any ice cream in the bowl�did you run out?\n",
-        "Ice Cream: Not enough ice cream to satisfy my sweet tooth!\n",
-        "Ice Cream: I could really use a bigger serving of ice cream next time.\n",
-        "Ice Cream: Why so little ice cream? I feel short-changed.\n"
+        "Ice Cream: I was really craving more ice cream. This is just a tease!",
+        "Ice Cream: Barely any ice cream in the bowl�did you run out?",
+        "Ice Cream: Not enough ice cream to satisfy my sweet tooth!",
+        "Ice Cream: I could really use a bigger serving of ice cream next time.",
+        "Ice Cream: Why so little ice cream? I feel short-changed."
     };
 
     string[] tooMuchIceCreamFeedback = {
-        "Ice Cream: Wow, that's a mountain of ice cream�this is a workout to finish!\n",
-        "Ice Cream: There�s so much ice cream; could you tone it down?\n",
-        "Ice Cream: Too much ice cream for me; it�s overwhelming!\n",
-        "Ice Cream: It�s a bit excessive�I�d prefer a more balanced portion of ice cream.\n",
-        "Ice Cream: I love ice cream, but this feels like an ice cream avalanche!\n"
+        "Ice Cream: Wow, that's a mountain of ice cream�this is a workout to finish!",
+        "Ice Cream: There�s so much ice cream; could you tone it down?",
+        "Ice Cream: Too much ice cream for me; it�s overwhelming!",
+        "Ice Cream: It�s a bit excessive�I�d prefer a more balanced portion of ice cream.",
+        "Ice Cream: I love ice cream, but this feels like an ice cream avalanche!"
     };
 
     string[] perfectIceCreamFeedback = {
@@ -255,21 +255,39 @@ public class Customer : MonoBehaviour
         int iceCreamScore, syrupScore, toppingsScore;
 
         // Customer preferences (randomized)
-        int preferredIceCream = Random.Range(3, 7) + 2; // Preferred quantity range
+        int preferredIceCream;                      // Ice Cream Amount range depends on weather
+        if (currentWeather == "Hot")
+        {
+            preferredIceCream = Random.Range(4, 9); // 4 to 8 scoops for Hot weather
+        }
+        else if (currentWeather == "Cold")
+        {
+            preferredIceCream = Random.Range(2, 5); // 2 to 4 scoops for Cold weather
+        }
+        else
+        {
+            preferredIceCream = Random.Range(3, 7) + 2; // If it's a different weather, use the default random amount
+        }
+
         int preferredSyrup = Random.Range(2, 6) + 2;
         int preferredToppings = Random.Range(1, 5) + 2;
 
-        if (iceCream < preferredIceCream) {
-            feedbackMessage += insufficientIceCreamFeedback[Random.Range(0, insufficientIceCreamFeedback.Length)] + " ";
-            iceCreamScore = 2; //Low score for insufficient amount of ice cream
+        if (iceCream < preferredIceCream)
+        {
+            int diff = preferredIceCream - iceCream;
+            feedbackMessage += insufficientIceCreamFeedback[Random.Range(0, insufficientIceCreamFeedback.Length)] + $" I needed {diff} more scoops! \n" + " ";
+            iceCreamScore = 2;  //Low score for insufficient amount of ice cream
         }
-        else if (iceCream > preferredIceCream + 2) {
-            feedbackMessage += tooMuchIceCreamFeedback[Random.Range(0, tooMuchIceCreamFeedback.Length)] + " ";
-            iceCreamScore = 2; //Low score for too much ice cream
+        else if (iceCream > preferredIceCream + 2)
+        {
+            int diff = iceCream - preferredIceCream;
+            feedbackMessage += tooMuchIceCreamFeedback[Random.Range(0, tooMuchIceCreamFeedback.Length)] + $" That's {diff} too many scoops. \n" + " ";
+            iceCreamScore = 2;  //Low score for too much ice cream
         }
-        else {
+        else
+        {
             feedbackMessage += perfectIceCreamFeedback[Random.Range(0, perfectIceCreamFeedback.Length)] + " ";
-            iceCreamScore = 5; //High score for perfect amount of ice cream
+            iceCreamScore = 5;  //High score for perfect amount of ice cream
         }
 
         if (syrup < preferredSyrup)
